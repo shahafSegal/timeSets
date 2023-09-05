@@ -43,13 +43,30 @@ function countDownAndPrint(){
     }
     else{
         clearInterval(countDownInterID)
+        document.getElementById('countDownBut').remove()
         countDownDiv.innerHTML="the time has ended"
     }
-
 }
 
 function activeCountDown(){
     printTimeLeft()
     countDownInterID=setInterval(countDownAndPrint,1000)
+
+    var countButton=document.getElementById('countDownBut')
+    if(!countButton){
+        mainDiv.innerHTML+=`<button id='countDownBut'></button>`
+        countButton=document.getElementById('countDownBut')
+    }
+    countButton.innerHTML="click me to Pause Timer"
+    countButton.onclick= clearCountDownAndChange
 }
+
+function clearCountDownAndChange(){
+    clearInterval(countDownInterID)
+    var countButton=document.getElementById('countDownBut')
+    countButton.innerHTML="click me to Continue Timer"
+    countButton.onclick=activeCountDown;
+}
+
+
 getTimeFromUser()
