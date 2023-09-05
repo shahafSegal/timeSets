@@ -6,7 +6,7 @@ function getUtcClockTime(thisDate){
 }
 
 
-//5
+//6
 var timeLeftMs=0;
 var countDownInterID=0;
 function printTimeLeft(){
