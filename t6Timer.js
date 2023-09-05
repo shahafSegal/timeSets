@@ -9,6 +9,8 @@ function getUtcClockTime(thisDate){
 //6
 var timeLeftMs=0;
 var countDownInterID=0;
+var alarmSound=new Audio('alarm.mp3')
+alarmSound.volume=0.2
 function printTimeLeft(){
     var translateDate= new Date(timeLeftMs)
     countDownDiv.innerHTML=getUtcClockTime(translateDate)
@@ -45,6 +47,7 @@ function countDownAndPrint(){
         clearInterval(countDownInterID)
         document.getElementById('countDownBut').remove()
         countDownDiv.innerHTML="the time has ended"
+        alarmSound.play()
     }
 }
 
