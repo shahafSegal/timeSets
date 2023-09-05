@@ -1,0 +1,55 @@
+function getClockTime(thisDate){
+    return `${thisDate.getHours()}:${thisDate.getMinutes()}:${thisDate.getSeconds()}`;
+}
+function getUtcClockTime(thisDate){
+    return `${thisDate.getUTCHours()}:${thisDate.getUTCMinutes()}:${thisDate.getUTCSeconds()}`;
+}
+
+
+//5
+var timeLeftMs=0;
+var countDownInterID=0;
+function printTimeLeft(){
+    var translateDate= new Date(timeLeftMs)
+    countDownDiv.innerHTML=getUtcClockTime(translateDate)
+}
+
+function getFullDateTillDay(date1){
+    var splittedDateArr=date1.toDateString().split(' ');
+    var onlyStart=[]
+    for (let i = 0; i < 4; i++) {
+        onlyStart.push(splittedDateArr[i])
+    } 
+    return onlyStart.join(' ')
+
+}
+
+function getTimeFromUser(){
+    var userFullTime= prompt("enter time in hour:minute (:second, optionally )")
+    var dateNow= new Date();
+    var userDate= new Date(`${getFullDateTillDay(dateNow)} ${userFullTime}`);
+    if(userDate<dateNow){
+        userDate.setHours(userDate.getHours()+24)
+    }
+    timeLeftMs= userDate-dateNow;
+    activeCountDown()
+}
+
+function countDownAndPrint(){
+    timeLeftMs-=1000
+    if(timeLeftMs>1000)
+    {
+        printTimeLeft()
+    }
+    else{
+        clearInterval(countDownInterID)
+        countDownDiv.innerHTML="the time has ended"
+    }
+
+}
+
+function activeCountDown(){
+    printTimeLeft()
+    countDownInterID=setInterval(countDownAndPrint,1000)
+}
+getTimeFromUser()

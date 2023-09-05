@@ -18,15 +18,23 @@ function printDelayedTime(){
     setTimeout(function(){printClockTime(dateNow)},90000)
 }
 function printClockTime(date1){
-    mainDiv.innerHTML= `${date1.getHours()}:${date1.getMinutes()}:${date1.getSeconds()}`;
+    mainDiv.innerHTML=  getClockTime(date1)
+}
+
+function getClockTime(thisDate){
+    return `${thisDate.getHours()}:${thisDate.getMinutes()}:${thisDate.getSeconds()}`;
 }
 
 // printDelayedTime()
 //4
-function printLoveTimers(){
-    var lTimerID= setTimeout(function(){mainDiv.innerHTML="i love timer"},10000)
+function setTimerLoveTimers(){
+    var lTimerID= setTimeout(printLoveTimer,10000)
     mainDiv.innerHTML +=`<button onclick="clearTimeout(${lTimerID})">stop the timer</button>`
 }
+function printLoveTimer(){
+    mainDiv.innerHTML+="i love timer"
+}
+
 // printLoveTimers()
 //5
 function printColmorphTitle(){
@@ -41,5 +49,58 @@ function changeColMorph(){
 
 //<=====Intervals=====>
 //1
+
+function intervalPrintTimer(){
+    return setInterval(printTimer,4000);
+}
+
+function printTimer(){
+    mainDiv.innerHTML+="timer"
+}
+// intervalPrintTimer()
+
+
+//2 
+var interCounter=0;
+function intervalPrintCounter(){
+    mainDiv.innerHTML+='0'
+    return setInterval(printCounter,6000)
+}
+function printCounter(){
+    mainDiv.innerHTML+=` ,${++interCounter}`
+}
+// intervalPrintCounter()
+//3
+function printIntervalLoveTimers(){
+    var lovInterID= setInterval(printLoveTimer,5000)
+    mainDiv.innerHTML +=`<button onclick="clearInterval(${lovInterID})">stop from printing more</button>`
+}
+// setIntervalLoveTimers();
+//4.5
+var clockIntervalID=0;
+function clockInterval(){
+    clockIntervalID = setInterval(printToClockTime,1000)
+    var clokButton=document.getElementById('clockButton')
+    if(!clokButton){
+        mainDiv.innerHTML+=`<button id='clockButton'></button>`
+        clokButton=document.getElementById('clockButton')
+    }
+    clokButton.innerHTML="click me to Stop"
+    clokButton.onclick= clearClockButtonAndChange
+}
+
+function printToClockTime(){
+    document.getElementById('clockDiv').innerHTML= getClockTime(new Date());
+}
+
+function clearClockButtonAndChange(){
+    clearInterval(clockIntervalID)
+    var clokButton=document.getElementById('clockButton')
+    clokButton.innerHTML="click me to Start Again"
+    clokButton.onclick=clockInterval;
+}
+clockInterval()
+
+
 
 
