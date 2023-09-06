@@ -5,6 +5,9 @@ function getUtcClockTime(thisDate){
     return `${thisDate.getUTCHours()}:${thisDate.getUTCMinutes()}:${thisDate.getUTCSeconds()}`;
 }
 
+// document+=
+
+
 
 //6
 var timeLeftMs=0;
@@ -54,7 +57,6 @@ function countDownAndPrint(){
 function activeCountDown(){
     printTimeLeft()
     countDownInterID=setInterval(countDownAndPrint,1000)
-
     var countButton=document.getElementById('countDownBut')
     if(!countButton){
         mainDiv.innerHTML+=`<button id='countDownBut'></button>`
